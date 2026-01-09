@@ -52,7 +52,8 @@ def statistics(request):
         stat['format_display'] = format_choices.get(stat['format'], stat['format'])
 
     chart_data = {
-        'genre_count_chart': get_genre_count(request.user)
+        'genre_count_chart': get_genre_count(request.user),
+        'genre_value_chart': get_genre_value(request.user)
     }
 
     context = {
@@ -132,28 +133,56 @@ def get_genre_count(user):
     data = []
 
     for genre in genres:
-        count = genre.vinylrecord_set.filter(user=user).count()
+        records = genre.vinylrecord_set.filter(user=user)
+        count = records.count()
         if count > 0:
             data.append({
                 'genre': genre.name,
                 'count': count
             })
-
     if not data:
         return "<p class='text-muted'>Нет данных по жанрам</p>"
 
     df = pd.DataFrame(data)
-
-    fig = px.pie(df, values='count', names='genre', title='Распределение по жанрам',
-                 hole=0.4, color_discrete_sequence=px.colors.qualitative.Set3)
+    df['count'] = df['count'].astype(int)
+    fig = px.pie(df, values='count', names='genre',
+                 color_discrete_sequence=px.colors.sequential.RdBu)
 
     fig.update_traces(textposition='inside', textinfo='percent+label',
         hovertemplate="<b>%{label}</b><br>" +
                       "Количество: %{value}<br>" +
-                      "Доля: %{percent}<br>" +
                       "<extra></extra>")
 
-    fig.update_layout(showlegend=True,
-                      legend=dict(orientation="h", yanchor="bottom", y=-0.3, xanchor="center", x=0.5), height=450)
+    fig.update_layout(showlegend=True, height=450)
 
-    return pio.to_html(fig, full_html=False, include_plotlyjs=False)
+    return pio.to_html(fig, full_html=False, include_plotlyjs=True)
+
+
+def get_genre_value(user):
+    genres = Genre.objects.all()
+    data = []
+    for genre in genres:
+        user_records = genre.vinylrecord_set.filter(user=user)
+        if user_records.exists():
+            avg_value = user_records.aggregate(avg=Avg('estimated_value'))['avg'] or 0
+            if avg_value > 0:
+                data.append({
+                    'genre': genre.name,
+                    'avg_value': avg_value,
+                })
+
+    if not data:
+        return "<p class='text-muted'>Нет данных по стоимости жанров</p>"
+
+    df = pd.DataFrame(data)
+    fig = px.pie(df, values='avg_value', names='genre',
+                 color_discrete_sequence=px.colors.sequential.RdBu)
+
+    fig.update_traces(textposition='inside', textinfo='percent+label',
+        hovertemplate="<b>%{label}</b><br>" +
+                      "Средняя стоимость: %{value:.0f} ₽<br>" +
+                      "<extra></extra>")
+
+    fig.update_layout(showlegend=True, height=450)
+
+    return pio.to_html(fig, full_html=False, include_plotlyjs=True)
