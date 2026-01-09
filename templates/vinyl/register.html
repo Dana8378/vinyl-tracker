@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'vinyl/base.html' %}
+
+{% block content %}
+    <h2>Регистрация</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+    <p>Уже есть аккаунт? <a href="{% url 'vinyl:login' %}">Войти</a></p>
+{% endblock %}

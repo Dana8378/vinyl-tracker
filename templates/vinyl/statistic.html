@@ -1,10 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'vinyl/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+<style>
+    .plotly-graph-div {
+        width: 100% !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    {% if stats.total_count > 0 %}
+    <div class="statistic">
+        <h2>Общая статистика коллекции</h2>
+        <p>Всего пластинок в коллекции: {{ stats.total_count|default:0 }}</p>
+        <p>Общая стоимость коллекции: {{ stats.total_value|default:0|floatformat:2 }}</p>
+        <p>Средняя стоимость пластинки: {{ stats.avg_value|default:0|floatformat:2 }}</p>
+    </div>
+
+    <div>
+        {{ chart_data.genre_count_chart|safe }}
+    </div>
+
+    <div>
+        <h2>Статистика по форматам</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Формат</th>
+                    <th>Количество</th>
+                    <th>Средняя стоимость</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for stat in format_stats %}
+                <tr>
+                    <td>{{ stat.format_display }}</td>
+                    <td>{{ stat.total_count }}</td>
+                    <td>{{ stat.avg_value|default:0|floatformat:2 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>В коллекции пока нет пластинок</p>
+    {% endif %}
+{% endblock %}

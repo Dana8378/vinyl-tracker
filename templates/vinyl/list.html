@@ -1,10 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'vinyl/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div>
+        <p>Всего пластинок в коллекции {{ total_count }}</p>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <a href="{% url 'vinyl:add_record'%}" class="btn btn-primary">
+            Добавить пластинку
+        </a>
+    </div>
+
+    {% if records %}
+    <table>
+        <thead>
+            <tr>
+                <th>Исполнитель</th>
+                <th>Альбом</th>
+                <th>Год выпуска</th>
+                <th>Жанр</th>
+                <th>Формат</th>
+                <th>Состояние</th>
+                <th>Оценочная стоимость</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for record in records %}
+            <tr>
+                <td>{{ record.artist }}</td>
+                <td>{{ record.title }}</td>
+                <td>{{ record.year }}</td>
+                <td>{{ record.genre.name|default:'-' }}</td>
+                <td>{{ record.get_format_display }}</td>
+                <td>{{ record.condition.get_grade_display }} ({{ record.condition.description }})</td>
+                <td>{{ record.estimated_value }} руб.</td>
+                <td class="actions">
+                    <a href="{% url 'vinyl:edit_record' record.id %}"
+                        class="btn-small btn-edit"
+                        title="Редактировать">
+                        ✏️
+                    </a>
+                    <a href="{% url 'vinyl:delete_record' record.id %}"
+                        class="btn-small btn-delete"
+                        title="Удалить">
+                        🗑️
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>В коллекции пока нет пластинок</p>
+    {% endif %}
+    <div style="margin-top: 30px;">
+        <a href="/admin/vinyl/vinylrecord/add/" style="color: blue;">
+            Добавить пластинку через админку
+        </a>
+    </div>
+{% endblock %}

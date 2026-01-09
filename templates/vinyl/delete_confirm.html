@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'vinyl/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="delete-confirm">
+        <h1>{{ title }}</h1>
+
+        <div class="alert alert-warning">
+            <h3>Вы уверены, что хотите удалить эту пластинку?</h3>
+            <p><strong>{{ record.artist }} - {{ record.title }} ({{ record.year }})</strong></p>
+            <p>Это действие нельзя отменить</p>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger">
+                    Да, удалить
+                </button>
+                <a href="{% url 'vinyl:vinyl_list' %}" class="btn btn-secondary">
+                    Нет, отмена
+                </a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

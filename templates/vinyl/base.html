@@ -2,9 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Трекер виниловых пластинок</title>
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
-
+    <header>
+        <nav>
+            <div class="navbar-meny">
+                <a href="{% url 'vinyl:home' %}" class="navbar-brand">Главная</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'vinyl:vinyl_list' %}" class="nav-link">Моя коллекция</a>
+                    <a href="{% url 'vinyl:statistics' %}" class="nav-link">Статистика</a>
+                    <form action="{% url 'vinyl:logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline btn-sm">Выйти</button>
+                    </form>
+                {% else %}
+                    <a href="/login/" class="nav-link">Войти</a>
+                    <a href="{% url 'vinyl:register' %}" class="btn btn-primary btn-sm">Регистрация</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>

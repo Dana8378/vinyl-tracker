@@ -1,10 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'vinyl/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h1>{{ title }}</h1>
+
+        <form method="post" class="vinyl-form">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="alert alert-errors">
+                    Исправте ошибки в форме
+                </div>
+            {% endif %}
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Исполнитель *</label>
+                    {{ form.artist }}
+                    {{ form.artist.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label>Название альбома *</label>
+                    {{ form.title }}
+                    {{ form.title.errors }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Год выпуска *</label>
+                    {{ form.year }}
+                    {{ form.year.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label>Формат</label>
+                    {{ form.format }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Жанр</label>
+                    {{ form.genre }}
+                </div>
+
+                <div class="form-group">
+                    <label>Состояние</label>
+                    {{ form.condition }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Оценочная стоимость *</label>
+                    {{ form.estimated_value }}
+                    {{ form.estimated_value.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label>Цена покупки</label>
+                    {{ form.purchase_price }}
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn_primary">
+                    Сохранить изменения
+                </button>
+                <a href="{% url 'vinyl:vinyl_list' %}" class="btn btn_secondary">
+                    Отмена
+                </a>
+                <a href="{% url 'vinyl:delete_record' record.id %}"
+                   class="btn btn_danger">
+                    Удалить
+                </a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
