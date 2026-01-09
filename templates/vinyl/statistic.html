@@ -36,28 +36,6 @@
         <h2>Средняя стоимость по форматам</h2>
         {{ chart_data.format_value_chart|safe }}
     </div>
-
-    <div>
-        <h2>Статистика по форматам</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Формат</th>
-                    <th>Количество</th>
-                    <th>Средняя стоимость</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for stat in format_stats %}
-                <tr>
-                    <td>{{ stat.format_display }}</td>
-                    <td>{{ stat.total_count }}</td>
-                    <td>{{ stat.avg_value|default:0|floatformat:2 }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
     {% else %}
         <p>В коллекции пока нет пластинок</p>
     {% endif %}

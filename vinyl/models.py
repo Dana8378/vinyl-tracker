@@ -8,23 +8,6 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
-    def get_records_count(self):
-        return self.vinylrecord_set.count()
-
-    def get_average_value(self):
-        from django.db.models import Avg
-        result = self.vinylrecord_set.aggregate(avg=Avg('estimated_value'))
-        return result['avg'] or 0
-
-    @property
-    def records_count_display(self):
-        return self.get_records_count()
-
-    @property
-    def average_value_display(self):
-        avg = self.get_average_value()
-        return f'{avg:.2f} руб.' if avg else '-'
-
     class Meta:
         verbose_name = 'Жанр'
         verbose_name_plural = 'Жанры'
