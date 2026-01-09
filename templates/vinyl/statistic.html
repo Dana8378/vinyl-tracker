@@ -28,6 +28,14 @@
         <h2>Средняя стоимость по жанрам</h2>
         {{ chart_data.genre_value_chart|safe }}
     </div>
+    <div>
+        <h2>Распределение по форматам</h2>
+        {{ chart_data.format_count_chart|safe }}
+    </div>
+    <div>
+        <h2>Средняя стоимость по форматам</h2>
+        {{ chart_data.format_value_chart|safe }}
+    </div>
 
     <div>
         <h2>Статистика по форматам</h2>

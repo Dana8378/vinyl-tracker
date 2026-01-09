@@ -3,9 +3,11 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
+    {% if records %}
     <div>
         <p>Всего пластинок в коллекции {{ total_count }}</p>
     </div>
+    {% endif %}
 
     <div style="margin-bottom: 20px;">
         <a href="{% url 'vinyl:add_record'%}" class="btn btn-primary">
@@ -56,9 +58,4 @@
     {% else %}
         <p>В коллекции пока нет пластинок</p>
     {% endif %}
-    <div style="margin-top: 30px;">
-        <a href="/admin/vinyl/vinylrecord/add/" style="color: blue;">
-            Добавить пластинку через админку
-        </a>
-    </div>
 {% endblock %}
