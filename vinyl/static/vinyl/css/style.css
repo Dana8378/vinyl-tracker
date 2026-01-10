@@ -1,0 +1,75 @@
+:root {
+    --golden: #D4A76A;
+    --orange: #8B4513;
+    --red: #C94C4C;
+    --light: #D8DDB8;
+    --dark: #3D2C1F;
+    --mid: #B08D57;
+    --olive: #8A9A5B;
+    --light-olive: #CBD2A5;
+    --dark-olive: #4D552F}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light);
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    border-bottom: 2px solid var(--dark-olive);
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-link {
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 18px;
+    color: var(--dark);
+}
+
+.link {
+    text-decoration: none;
+    font-size: 18px;
+    color: var(--dark)
+}
+
+.nav-link:hover {
+    color: var(--orange)
+}
+
+.link:hover {
+    color: var(--orange);
+}
+
+.btn {
+    text-decoration: none;
+    border: 1px solid transparent;
+    background-color: var(--light);
+    font-size: 18px;
+}
+
+.btn:hover {
+    color: var(--orange)
+}

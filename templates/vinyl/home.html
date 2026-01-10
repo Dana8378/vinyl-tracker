@@ -2,9 +2,54 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+{% block extra_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'vinyl/css/home.css' %}">
+{% endblock %}
+
 {% block content %}
-    <div class="header">
-        <h1>{{ title }}</h1>
-        <p>{{ message }}</p>
+    <div class="page-container">
+        <h1 class="title">{{ title }}</h1>
+        <p class="hello-message">{{ message }}</p>
+        {% if user.is_authenticated %}
+        <div class="home-link-container">
+            <a href="{% url 'vinyl:add_record'%}" class="link begin-link">
+                Начать коллекцию
+            </a>
+        </div>
+        <div class="promo">
+            <div class="promo-card">
+                <h3>Посмотрите на вашу коллекцию</h3>
+                <div class="home-link-container">
+                    <a href="{% url 'vinyl:vinyl_list'%}" class="link home-link">
+                        Посмотреть
+                    </a>
+                </div>
+            </div>
+            <div class="promo-card">
+                <h3>Посмотрите статистику</h3>
+                <div class="home-link-container">
+                    <a href="{% url 'vinyl:statistics'%}" class="link home-link">
+                        Посмотреть
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div>
+            <p class="hello-message">Зарегистрируйтесь, чтобы начать коллекцию</p>
+        </div>
+        <h2>Что вы сможете делать?</h2>
+        <div class="features">
+            <div class="feature">
+                <h3>Учет пластинок</h3>
+                <p class="feature-message">Таблица со всей информацией о вашей коллекции</p>
+            </div>
+            <div class="feature">
+                <h3>Статистика коллекции</h3>
+                <p class="feature-message">Графики по различным параметрам</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}

@@ -5,17 +5,18 @@
 Пользователь: хранение данных о коллекции, просмотр статистики по коллекции
 3. **Модели данных**:
     * Vinil_record: Виниловая пластинка
-        * Поля: user (ForeignKey), title, artist, year, genre (ForeignKey), condition, estimated_value, purchase_price, format, created_at 
+        * Поля: user (ForeignKey), title, artist, year, genre (ForeignKey), condition(ForeignKey), estimated_value, purchase_price, format, created_at, update_at
     * Genre: Жанр
-        * Поля: name, description, color, records_count, average_value
+        * Поля: name
     * Record_condition: Состояние пластинки
-        * Поля: grade, name, description, value_multiplier
+        * Поля: grade, description
 4. **Ключевой функционал**:
 * Добавление/редактирование/удаление записей о пластинках
 * Расчет:
   * Общей стоимости коллекции
   * Средней стоимости пластинки
-  * Статистика распределения по жанрам и годам выпуска
+  * Распределения по жанрам и форматам
+  * Средней стоимости по жанрам и форматам
   * Топ-5 самых ценных пластинок
 * Визуализация всей статистики в виде графиков
-5. **Внешние интеграции / Аналитика**: Использование библиотеки Pandas для расчетов. Генерация изображений графиков через Plotly.
+5. **Внешние интеграции / Аналитика**: Использование библиотеки Django ORM для агрегации и фильтрации. Использование Pandas для обработки данных для графиков. Генерация изображений графиков через Plotly.

@@ -1,0 +1,60 @@
+.title {
+    text-align: center;
+    font-size: 40px;
+    color: var(--dark-olive);
+}
+
+.hello-message {
+    text-align: center;
+    font-size: 24px;
+}
+
+.home-link-container {
+    text-align: center;
+}
+
+.begin-link {
+    font-size: 24px;
+    border: 2px solid var(--dark-olive);
+    border-radius: 4px;
+    padding: 4px 4px;
+}
+
+.home-link {
+    font-size: 24px;
+    border: 2px solid var(--dark-olive);
+    border-radius: 4px;
+    padding: 4px 4px;
+}
+
+.home-link:hover {
+    background-color: var(--light-olive);
+}
+
+.promo, .features {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.promo-card {
+    width: 400px;
+}
+
+.feature {
+    width: 400px;
+    border: 2px solid var(--dark-olive);
+    border-radius: 4px;
+    padding: 4px 4px;
+}
+
+h3, h2{
+    text-align: center;
+    color: var(--dark);
+}
+
+.feature-message {
+    text-align: center;
+}

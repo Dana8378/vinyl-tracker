@@ -4,28 +4,45 @@
     <meta charset="UTF-8">
     <title>Трекер виниловых пластинок</title>
     {% block extra_head %}{% endblock %}
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'vinyl/css/style.css' %}">
+
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <header>
-        <nav>
-            <div class="navbar-meny">
-                <a href="{% url 'vinyl:home' %}" class="navbar-brand">Главная</a>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'vinyl:vinyl_list' %}" class="nav-link">Моя коллекция</a>
-                    <a href="{% url 'vinyl:statistics' %}" class="nav-link">Статистика</a>
-                    <form action="{% url 'vinyl:logout' %}" method="post" style="display: inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-outline btn-sm">Выйти</button>
-                    </form>
-                {% else %}
-                    <a href="/login/" class="nav-link">Войти</a>
-                    <a href="{% url 'vinyl:register' %}" class="btn btn-primary btn-sm">Регистрация</a>
-                {% endif %}
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-content">
+                    <div class="nav-left">
+                        <a href="{% url 'vinyl:home' %}" class="nav-link">Главная</a>
+                        {% if user.is_authenticated %}
+                        <div class="nav-menu">
+                            <a href="{% url 'vinyl:vinyl_list' %}" class="nav-link">Моя коллекция</a>
+                            <a href="{% url 'vinyl:statistics' %}" class="nav-link">Статистика</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="nav-right">
+                        {% if user.is_authenticated %}
+                            <form action="{% url 'vinyl:logout' %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline btn-sm">Выйти</button>
+                            </form>
+                        {% else %}
+                            <a href="/login/" class="nav-link">Войти</a>
+                            <a href="{% url 'vinyl:register' %}" class="nav-link">Регистрация</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </nav>
     </header>
-    <div>
+    <div class="content-container">
+    <main class="main-container">
         {% block content %}{% endblock %}
+    </main>
     </div>
 </body>
 </html>
