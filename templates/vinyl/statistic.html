@@ -4,11 +4,6 @@
 
 {% block extra_head %}
 <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
-<style>
-    .plotly-graph-div {
-        width: 100% !important;
-    }
-</style>
 {% endblock %}
 
 {% block content %}
@@ -18,6 +13,17 @@
         <p>Всего пластинок в коллекции: {{ stats.total_count|default:0 }}</p>
         <p>Общая стоимость коллекции: {{ stats.total_value|default:0|floatformat:2 }}</p>
         <p>Средняя стоимость пластинки: {{ stats.avg_value|default:0|floatformat:2 }}</p>
+    </div>
+
+    <div class="top_expensive">
+        {% if top_5 %}
+            <h2>Топ 5 самых ценных экземпляров коллекции</h2>
+            {% for record in top_5 %}
+                <div>
+                    <p>{{ record.estimated_value }} руб. - {{ record.title }} ({{ record.artist }}, {{ record.year }})</p>
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>
 
     <div>

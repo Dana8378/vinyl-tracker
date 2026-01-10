@@ -38,15 +38,6 @@ def statistics(request):
         avg_value=Avg('estimated_value')
     )
 
-    format_stats = records.values('format').annotate(
-        total_count=Count('id'),
-        avg_value=Avg('estimated_value')
-    )
-
-    format_choices = dict(VinylRecord.FORMAT_CHOICES)
-    for stat in format_stats:
-        stat['format_display'] = format_choices.get(stat['format'], stat['format'])
-
     chart_data = {
         'genre_count_chart': get_genre_count(request.user),
         'genre_value_chart': get_genre_value(request.user),
@@ -54,10 +45,12 @@ def statistics(request):
         'format_value_chart': get_format_value(request.user)
     }
 
+    top_5_expensive_records = records.order_by('estimated_value')[:5]
+
     context = {
         'stats': stats,
-        'format_stats': format_stats,
         'chart_data': chart_data,
+        'top_5': top_5_expensive_records,
         'title': 'Статистика коллекции'
     }
 
