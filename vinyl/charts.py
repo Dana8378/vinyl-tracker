@@ -26,9 +26,9 @@ def get_genre_count(user):
                  color_discrete_sequence=px.colors.sequential.RdBu)
 
     fig.update_traces(textposition='inside', textinfo='percent+label',
-        hovertemplate="<b>%{label}</b><br>" +
-                      "Количество: %{value}<br>" +
-                      "<extra></extra>")
+                      hovertemplate="<b>%{label}</b><br>" +
+                                    "Количество: %{value}<br>" +
+                                    "<extra></extra>")
 
     fig.update_layout(showlegend=True, height=450)
 
@@ -51,15 +51,16 @@ def get_genre_value(user):
         return "<p class='text-muted'>Нет данных по стоимости жанров</p>"
 
     df = pd.DataFrame(data)
+    df = df.sort_values('avg_value')
+    df['display_value'] = df['avg_value'].apply(lambda x: f'{int(x)} руб.')
+
     fig = px.pie(df, values='avg_value', names='genre',
                  color_discrete_sequence=px.colors.sequential.RdBu)
 
-    fig.update_traces(textposition='inside', textinfo='percent+label',
-        hovertemplate="<b>%{label}</b><br>" +
-                      "Средняя стоимость: %{value:.0f} ₽<br>" +
-                      "<extra></extra>")
+    fig.update_traces(textposition='inside', textinfo='label+text', text=df['display_value'],
+                      hovertemplate=None, hoverinfo='skip')
 
-    fig.update_layout(showlegend=True, height=450)
+    fig.update_layout(showlegend=True, height=450, hovermode=False)
 
     return pio.to_html(fig, full_html=False, include_plotlyjs=True)
 
@@ -78,9 +79,9 @@ def get_format_count(user):
     fig = px.pie(df, values='count', names='format_name', color_discrete_sequence=px.colors.sequential.RdBu)
 
     fig.update_traces(textposition='inside', textinfo='percent+label',
-        hovertemplate="<b>%{label}</b><br>" +
-                      "Количество: %{value}<br>" +
-                      "<extra></extra>"
+                      hovertemplate="<b>%{label}</b><br>" +
+                                    "Количество: %{value}<br>" +
+                                    "<extra></extra>"
     )
     fig.update_layout(showlegend=True, height=450)
 
@@ -97,14 +98,14 @@ def get_format_value(user):
     format_dict = dict(VinylRecord.FORMAT_CHOICES)
     df['format_name'] = df['format'].map(lambda x: format_dict.get(x, x))
     df['avg_value'] = df['avg_value'].astype(float).round(2)
+    df = df.sort_values('avg_value')
+    df['display_value'] = df['avg_value'].apply(lambda x: f'{int(x)} руб.')
 
     fig = px.pie(df, values='avg_value', names='format_name', color_discrete_sequence=px.colors.sequential.RdBu)
 
-    fig.update_traces(textposition='inside', textinfo='percent+label',
-                      hovertemplate="<b>%{label}</b><br>" +
-                                    "Средняя стоимость: %{value:.0f} ₽<br>" +
-                                    "<extra></extra>")
+    fig.update_traces(textposition='inside', textinfo='label+text', text=df['display_value'],
+                      hovertemplate=None, hoverinfo='skip')
 
-    fig.update_layout(showlegend=True, height=450)
+    fig.update_layout(showlegend=True, height=450, hovermode=False)
 
     return pio.to_html(fig, full_html=False, include_plotlyjs=True)

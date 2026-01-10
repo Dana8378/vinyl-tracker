@@ -45,7 +45,7 @@ def statistics(request):
         'format_value_chart': get_format_value(request.user)
     }
 
-    top_5_expensive_records = records.order_by('estimated_value')[:5]
+    top_5_expensive_records = records.order_by('-estimated_value')[:5]
 
     context = {
         'stats': stats,
