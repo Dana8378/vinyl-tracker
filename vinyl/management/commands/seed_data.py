@@ -4,14 +4,12 @@ from vinyl.models import Genre, RecordCondition
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        RecordCondition.objects.all().delete()
-        Genre.objects.all().delete()
 
         genres = ['Рок', 'Поп', 'Джаз', 'Блюз', 'Классика',
                   'Электроника', 'Хип-хоп', 'Фолк', 'Кантри', 'Регги']
 
         for genre_name in genres:
-            Genre.objects.create(name=genre_name)
+            Genre.objects.get_or_create(name=genre_name)
 
         conditions = [
             {
@@ -45,4 +43,4 @@ class Command(BaseCommand):
         ]
 
         for condition in conditions:
-            RecordCondition.objects.create(grade=condition['grade'], description=condition['description'])
+            RecordCondition.objects.get_or_create(grade=condition['grade'], description=condition['description'])
