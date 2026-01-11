@@ -134,7 +134,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 if 'RENDER' in os.environ:
     DEBUG = False
-    ALLOWED_HOSTS = ['https://vinyl-tracker-keai.onrender.com', 'localhost']
+    ALLOWED_HOSTS = ['https://vinyl-tracker-keai.onrender.com', 'localhost', '127.0.0.1']
 
     SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
 
