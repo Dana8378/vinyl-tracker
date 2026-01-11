@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: vinyl-tracker
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn djangoProject.wsgi"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+
+databases:
+  - name: vinyl-db
+    plan: free
