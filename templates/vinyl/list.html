@@ -41,14 +41,14 @@
                 <td>{{ record.estimated_value }} руб.</td>
                 <td class="actions">
                     <a href="{% url 'vinyl:edit_record' record.id %}"
-                        class="btn-small btn-edit"
+                        class="link btn-edit"
                         title="Редактировать">
-                        ✏️
+                        Редактировать
                     </a>
                     <a href="{% url 'vinyl:delete_record' record.id %}"
-                        class="btn-small btn-delete"
+                        class="link btn-delete"
                         title="Удалить">
-                        🗑️
+                        Удалить
                     </a>
                 </td>
             </tr>

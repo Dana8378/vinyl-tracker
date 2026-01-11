@@ -30,7 +30,7 @@ def get_genre_count(user):
                                     "Количество: %{value}<br>" +
                                     "<extra></extra>")
 
-    fig.update_layout(showlegend=True, height=450)
+    fig.update_layout(showlegend=True, height=450, paper_bgcolor='#D8DDB8')
 
     return pio.to_html(fig, full_html=False, include_plotlyjs=True)
 
@@ -60,7 +60,7 @@ def get_genre_value(user):
     fig.update_traces(textposition='inside', textinfo='label+text', text=df['display_value'],
                       hovertemplate=None, hoverinfo='skip')
 
-    fig.update_layout(showlegend=True, height=450, hovermode=False)
+    fig.update_layout(showlegend=True, height=450, hovermode=False, paper_bgcolor='#D8DDB8')
 
     return pio.to_html(fig, full_html=False, include_plotlyjs=True)
 
@@ -83,7 +83,7 @@ def get_format_count(user):
                                     "Количество: %{value}<br>" +
                                     "<extra></extra>"
     )
-    fig.update_layout(showlegend=True, height=450)
+    fig.update_layout(showlegend=True, height=450, paper_bgcolor='#D8DDB8')
 
     return pio.to_html(fig, full_html=False, include_plotlyjs=True)
 
@@ -106,6 +106,6 @@ def get_format_value(user):
     fig.update_traces(textposition='inside', textinfo='label+text', text=df['display_value'],
                       hovertemplate=None, hoverinfo='skip')
 
-    fig.update_layout(showlegend=True, height=450, hovermode=False)
+    fig.update_layout(showlegend=True, height=450, hovermode=False, paper_bgcolor='#D8DDB8')
 
     return pio.to_html(fig, full_html=False, include_plotlyjs=True)
