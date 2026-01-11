@@ -134,9 +134,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 if 'RENDER' in os.environ:
     DEBUG = False
-    ALLOWED_HOSTS = ['https://vinyl-tracker-keai.onrender.com', 'localhost', '127.0.0.1']
+    ALLOWED_HOSTS = ['vinyl-tracker-keai.onrender.com', 'localhost', '127.0.0.1']
 
     SECRET_KEY = os.environ.get('SECRET_KEY', SECRET_KEY)
+
+    CSRF_TRUSTED_ORIGINS = [
+        'https://vinyl-tracker-keai.onrender.com',
+    ]
 
     if 'DATABASE_URL' in os.environ:
         import dj_database_url
