@@ -1,11 +1,11 @@
 **Vinyl Tracker**  
 Веб-приложение для учета, анализа и оценки вашей коллекции виниловых пластинок. Позволяет отслеживать стоимость, жанровое распределение и получать подробную статистику по коллекции. 
 
-**Ссылка на рабочий проект**: https://vinyl-tracker-keai.onrender.com  
+**Ссылка на рабочий проект**: https://vinyl-tracker-keai.onrender.com (юзер с тестовыми данными:demo_user, пароль: parol123)  
 
 **Стек технологий**
 * Backend: Python 3.11, Django 4.2
-* Database: SQlite
+* Database: SQLite (Dev), PostgreSQL (Prod)
 * Analytics: Django ORM (расчет и фильтрация), Pandas (подготовка данных для графиков), Plotly (отрисовка графиков)
 * Frontend: HTML5, CSS  
 
