@@ -16,11 +16,11 @@
             <div class="navbar-container">
                 <div class="navbar-content">
                     <div class="nav-left">
-                        <a href="{% url 'vinyl:home' %}" class="nav-link">Главная</a>
+                        <a href="{% url 'vinyl:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">Главная</a>
                         {% if user.is_authenticated %}
                         <div class="nav-menu">
-                            <a href="{% url 'vinyl:vinyl_list' %}" class="nav-link">Моя коллекция</a>
-                            <a href="{% url 'vinyl:statistics' %}" class="nav-link">Статистика</a>
+                            <a href="{% url 'vinyl:vinyl_list' %}" class="nav-link {% if request.resolver_match.url_name == 'vinyl_list' %}active{% endif %}">Моя коллекция</a>
+                            <a href="{% url 'vinyl:statistics' %}" class="nav-link {% if request.resolver_match.url_name == 'statistics' %}active{% endif %}">Статистика</a>
                         </div>
                         {% endif %}
                     </div>
@@ -28,7 +28,7 @@
                         {% if user.is_authenticated %}
                             <form action="{% url 'vinyl:logout' %}" method="post" style="display: inline;">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-outline btn-sm">Выйти</button>
+                                <button type="submit" class="btn btn-outline">Выйти</button>
                             </form>
                         {% else %}
                             <a href="/login/" class="nav-link">Войти</a>

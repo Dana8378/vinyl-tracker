@@ -1,0 +1,44 @@
+.btn-secondary {
+    border: 2px solid var(--olive);
+    margin-left: 70px;
+    padding: 3px 4px;
+}
+
+.btn-danger {
+    padding: 4px;
+}
+
+.btn-secondary,
+.btn-danger {
+    font-size: 22px;
+}
+
+.btn-secondary:hover,
+.btn-danger:hover {
+    background-color: var(--light-olive);
+    border-color: var(--dark-red);
+}
+
+.form-actions {
+    display: flex;
+    max-width: 450px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.delete-confirm{
+    text-align: center;
+}
+
+.title {
+    font-size: 40px;
+    color: var(--dark-olive);
+}
+
+.alert-warning h3 {
+    font-size: 24px;
+}
+
+.alert-warning p {
+    font-size: 20px;
+}

@@ -65,11 +65,19 @@ body {
     color: var(--red);
 }
 
+.nav-link.active {
+    color: var(--red);
+}
+
 .btn {
     text-decoration: none;
-    border: 1px solid transparent;
+    border: 2px solid var(--olive);
     background-color: var(--light);
     font-size: 18px;
+}
+
+.btn-outline {
+    border: 1px solid transparent;
 }
 
 .btn:hover {

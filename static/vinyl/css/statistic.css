@@ -1,4 +1,4 @@
-.page-container {
+.grid-container {
     display: grid;
     grid-template-columns: repeat(2 , 1fr);
     grid-template-rows: repeat(3, auto);
@@ -16,4 +16,9 @@
 h2 {
     color: var(--dark-olive);
     text-align: center;
+}
+
+.empty-message {
+    text-align: center;
+    font-size: 20px;
 }

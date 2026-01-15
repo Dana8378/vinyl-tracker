@@ -14,43 +14,45 @@
 
 {% block content %}
     <div class="page-container">
-        {% if stats.total_count > 0 %}
-        <div class="statistic card">
-            <h2>Общая статистика коллекции</h2>
-            <p>Всего пластинок в коллекции: <strong>{{ stats.total_count|default:0 }}</strong></p>
-            <p>Общая стоимость коллекции: <strong>{{ stats.total_value|default:0|floatformat:2 }}</strong></p>
-            <p>Средняя стоимость пластинки: <strong>{{ stats.avg_value|default:0|floatformat:2 }}</strong></p>
-        </div>
+    {% if stats.total_count > 0 %}
+        <div class="grid-container">
+            <div class="statistic card">
+                <h2>Общая статистика коллекции</h2>
+                <p>Всего пластинок в коллекции: <strong>{{ stats.total_count|default:0 }}</strong></p>
+                <p>Общая стоимость коллекции: <strong>{{ stats.total_value|default:0|floatformat:2 }}</strong></p>
+                <p>Средняя стоимость пластинки: <strong>{{ stats.avg_value|default:0|floatformat:2 }}</strong></p>
+            </div>
 
-        <div class="top_expensive card">
-            {% if top_5 %}
-                <h2>Топ 5 самых ценных экземпляров коллекции</h2>
-                {% for record in top_5 %}
-                    <div>
-                        <p><strong>{{ record.estimated_value }} руб.</strong> - {{ record.title }} ({{ record.artist }}, {{ record.year }})</p>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
+            <div class="top_expensive card">
+                {% if top_5 %}
+                    <h2>Топ 5 самых ценных экземпляров коллекции</h2>
+                    {% for record in top_5 %}
+                        <div>
+                            <p><strong>{{ record.estimated_value }} руб.</strong> - {{ record.title }} ({{ record.artist }}, {{ record.year }})</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
 
-        <div class="card">
-            <h2>Распределение по жанрам</h2>
-            {{ chart_data.genre_count_chart|safe }}
+            <div class="card">
+                <h2>Распределение по жанрам</h2>
+                {{ chart_data.genre_count_chart|safe }}
+            </div>
+            <div class="card">
+                <h2>Средняя стоимость по жанрам</h2>
+                {{ chart_data.genre_value_chart|safe }}
+            </div>
+            <div class="card">
+                <h2>Распределение по форматам</h2>
+                {{ chart_data.format_count_chart|safe }}
+            </div>
+            <div class="card">
+                <h2>Средняя стоимость по форматам</h2>
+                {{ chart_data.format_value_chart|safe }}
+            </div>
         </div>
-        <div class="card">
-            <h2>Средняя стоимость по жанрам</h2>
-            {{ chart_data.genre_value_chart|safe }}
-        </div>
-        <div class="card">
-            <h2>Распределение по форматам</h2>
-            {{ chart_data.format_count_chart|safe }}
-        </div>
-        <div class="card">
-            <h2>Средняя стоимость по форматам</h2>
-            {{ chart_data.format_value_chart|safe }}
-        </div>
-        {% else %}
-            <p>В коллекции пока нет пластинок</p>
-        {% endif %}
+    {% else %}
+        <p class="empty-message">В коллекции пока нет пластинок</p>
+    {% endif %}
     </div>
 {% endblock %}

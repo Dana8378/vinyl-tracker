@@ -13,6 +13,8 @@
             <div class="counter">
                 <p>Всего пластинок в коллекции: <strong>{{ total_count }}</strong></p>
             </div>
+        {% else %}
+            <p class="empty-message">В коллекции пока нет пластинок</p>
         {% endif %}
 
         <div class="add-button">
@@ -61,8 +63,6 @@
                     </tbody>
                 </table>
             </div>
-        {% else %}
-            <p>В коллекции пока нет пластинок</p>
         {% endif %}
     </div>
 {% endblock %}
