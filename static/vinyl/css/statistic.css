@@ -1,0 +1,19 @@
+.page-container {
+    display: grid;
+    grid-template-columns: repeat(2 , 1fr);
+    grid-template-rows: repeat(3, auto);
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 40px;
+}
+
+.card {
+    border: 2px solid var(--olive);
+    padding: 8px;
+    border-radius: 4px;
+}
+
+h2 {
+    color: var(--dark-olive);
+    text-align: center;
+}

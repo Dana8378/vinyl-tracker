@@ -22,7 +22,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    border-bottom: 2px solid var(--dark-olive);
+    border-bottom: 2px solid var(--olive);
 }
 
 .navbar-content {

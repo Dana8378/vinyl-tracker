@@ -15,14 +15,14 @@
 
 .begin-link {
     font-size: 24px;
-    border: 2px solid var(--dark-olive);
+    border: 2px solid var(--olive);
     border-radius: 4px;
     padding: 4px 4px;
 }
 
 .home-link {
     font-size: 24px;
-    border: 2px solid var(--dark-olive);
+    border: 2px solid var(--olive);
     border-radius: 4px;
     padding: 4px 4px;
 }
@@ -48,7 +48,7 @@
 
 .feature {
     width: 400px;
-    border: 2px solid var(--dark-olive);
+    border: 2px solid var(--olive);
     border-radius: 4px;
     padding: 4px 4px;
 }

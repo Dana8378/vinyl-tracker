@@ -5,6 +5,11 @@ from .models import VinylRecord, Genre
 from django.db.models import Count, Avg
 
 
+palette = ['#C94C4C', '#8A9A5B', '#E18282', '#CBD2A5', '#A73C3C',
+           '#76844D', '#F9B8B8', '#E9EDD5', '#852D2D', '#4D552F'
+]
+
+
 def get_genre_count(user):
     genres = Genre.objects.all()
     data = []
@@ -23,7 +28,7 @@ def get_genre_count(user):
     df['count'] = df['count'].astype(int)
 
     fig = px.pie(df, values='count', names='genre',
-                 color_discrete_sequence=px.colors.sequential.RdBu)
+                 color_discrete_sequence=palette)
 
     fig.update_traces(textposition='inside', textinfo='percent+label',
                       hovertemplate="<b>%{label}</b><br>" +
@@ -55,7 +60,7 @@ def get_genre_value(user):
     df['display_value'] = df['avg_value'].apply(lambda x: f'{int(x)} руб.')
 
     fig = px.pie(df, values='avg_value', names='genre',
-                 color_discrete_sequence=px.colors.sequential.RdBu)
+                 color_discrete_sequence=palette)
 
     fig.update_traces(textposition='inside', textinfo='label+text', text=df['display_value'],
                       hovertemplate=None, hoverinfo='skip')
@@ -76,7 +81,7 @@ def get_format_count(user):
     format_dict = dict(VinylRecord.FORMAT_CHOICES)
     df['format_name'] = df['format'].map(lambda x: format_dict.get(x, x))
 
-    fig = px.pie(df, values='count', names='format_name', color_discrete_sequence=px.colors.sequential.RdBu)
+    fig = px.pie(df, values='count', names='format_name', color_discrete_sequence=palette)
 
     fig.update_traces(textposition='inside', textinfo='percent+label',
                       hovertemplate="<b>%{label}</b><br>" +
@@ -101,7 +106,7 @@ def get_format_value(user):
     df = df.sort_values('avg_value')
     df['display_value'] = df['avg_value'].apply(lambda x: f'{int(x)} руб.')
 
-    fig = px.pie(df, values='avg_value', names='format_name', color_discrete_sequence=px.colors.sequential.RdBu)
+    fig = px.pie(df, values='avg_value', names='format_name', color_discrete_sequence=palette)
 
     fig.update_traces(textposition='inside', textinfo='label+text', text=df['display_value'],
                       hovertemplate=None, hoverinfo='skip')
