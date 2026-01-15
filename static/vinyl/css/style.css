@@ -7,7 +7,9 @@
     --mid: #B08D57;
     --olive: #8A9A5B;
     --light-olive: #CBD2A5;
-    --dark-olive: #4D552F}
+    --dark-olive: #4D552F;
+    --dark-red: #852D2D;
+    --light-red: #E99494}
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -56,11 +58,11 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--orange)
+    color: var(--red)
 }
 
 .link:hover {
-    color: var(--orange);
+    color: var(--red);
 }
 
 .btn {
@@ -71,5 +73,5 @@ body {
 }
 
 .btn:hover {
-    color: var(--orange)
+    color: var(--red)
 }

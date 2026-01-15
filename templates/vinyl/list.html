@@ -2,60 +2,67 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+{% block extra_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'vinyl/css/list.css' %}">
+{% endblock %}
+
 {% block content %}
-    {% if records %}
-    <div>
-        <p>Всего пластинок в коллекции {{ total_count }}</p>
-    </div>
-    {% endif %}
+    <div class="page-container">
+        {% if records %}
+            <div class="counter">
+                <p>Всего пластинок в коллекции: <strong>{{ total_count }}</strong></p>
+            </div>
+        {% endif %}
 
-    <div style="margin-bottom: 20px;">
-        <a href="{% url 'vinyl:add_record'%}" class="nav-link">
-            Добавить пластинку
-        </a>
-    </div>
+        <div>
+            <a href="{% url 'vinyl:add_record'%}" class="link add-link">
+                Добавить пластинку
+            </a>
+        </div>
 
-    {% if records %}
-    <table>
-        <thead>
-            <tr>
-                <th>Исполнитель</th>
-                <th>Альбом</th>
-                <th>Год выпуска</th>
-                <th>Жанр</th>
-                <th>Формат</th>
-                <th>Состояние</th>
-                <th>Оценочная стоимость</th>
-                <th>Действия</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for record in records %}
-            <tr>
-                <td>{{ record.artist }}</td>
-                <td>{{ record.title }}</td>
-                <td>{{ record.year }}</td>
-                <td>{{ record.genre.name|default:'-' }}</td>
-                <td>{{ record.get_format_display }}</td>
-                <td>{{ record.condition.get_grade_display }} ({{ record.condition.description }})</td>
-                <td>{{ record.estimated_value }} руб.</td>
-                <td class="actions">
-                    <a href="{% url 'vinyl:edit_record' record.id %}"
-                        class="link btn-edit"
-                        title="Редактировать">
-                        Редактировать
-                    </a>
-                    <a href="{% url 'vinyl:delete_record' record.id %}"
-                        class="link btn-delete"
-                        title="Удалить">
-                        Удалить
-                    </a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <p>В коллекции пока нет пластинок</p>
-    {% endif %}
+        {% if records %}
+            <div class="table-container">
+                <table class="table-collection">
+                    <thead>
+                        <tr>
+                            <th>Исполнитель</th>
+                            <th>Альбом</th>
+                            <th>Год выпуска</th>
+                            <th>Жанр</th>
+                            <th>Формат</th>
+                            <th>Состояние</th>
+                            <th>Оценочная стоимость</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for record in records %}
+                        <tr>
+                            <td>{{ record.artist }}</td>
+                            <td>{{ record.title }}</td>
+                            <td>{{ record.year }}</td>
+                            <td>{{ record.genre.name|default:'-' }}</td>
+                            <td>{{ record.get_format_display }}</td>
+                            <td>{{ record.condition.get_grade_display }} ({{ record.condition.description }})</td>
+                            <td>{{ record.estimated_value }} руб.</td>
+                            <td class="actions">
+                                <a href="{% url 'vinyl:edit_record' record.id %}"
+                                    class="link link-action">
+                                    Редактировать
+                                </a>
+                                <a href="{% url 'vinyl:delete_record' record.id %}"
+                                    class="link link-action">
+                                    Удалить
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>В коллекции пока нет пластинок</p>
+        {% endif %}
+    </div>
 {% endblock %}

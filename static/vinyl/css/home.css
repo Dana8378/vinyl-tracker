@@ -27,11 +27,14 @@
     padding: 4px 4px;
 }
 
-.home-link:hover {
+.home-link:hover,
+.begin-link:hover {
     background-color: var(--light-olive);
+    border-color: var(--dark-red);
 }
 
-.promo, .features {
+.promo,
+.features {
     display: flex;
     flex-direction: row;
     gap: 100px;
@@ -50,7 +53,8 @@
     padding: 4px 4px;
 }
 
-h3, h2{
+h3,
+h2{
     text-align: center;
     color: var(--dark);
 }
