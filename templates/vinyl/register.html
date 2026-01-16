@@ -1,11 +1,72 @@
 {% extends 'vinyl/base.html' %}
 
+{% block extra_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'vinyl/css/register.css' %}">
+{% endblock %}
+
 {% block content %}
-    <h2>Регистрация</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Зарегистрироваться</button>
-    </form>
-    <p>Уже есть аккаунт? <a href="{% url 'vinyl:login' %}">Войти</a></p>
+    <div class="form-container">
+        <h1>Регистрация</h1>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="id_username" class="label">
+                    Имя пользователя:
+                </label>
+                <input type="text"
+                       name="username"
+                       id="id_username"
+                       required
+                       maxlength="150">
+                {% if form.username.errors %}
+                    <div class="error">{{ form.username.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="id_password1" class="label">
+                    Пароль:
+                </label>
+                <input type="password"
+                       name="password1"
+                       id="id_password1"
+                       required>
+                {% if form.password1.errors %}
+                    <div class="error">{{ form.password1.errors }}</div>
+                {% endif %}
+                <div class="list-container">
+                    <ul class="hints">
+                        <li>Не менее 8 символов</li>
+                        <li>Содержит цифры и буквы</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="id_password2" class="label">
+                    Подтверждение пароля:
+                </label>
+                <input type="password"
+                       name="password2"
+                       id="id_password2"
+                       required>
+                {% if form.password2.errors %}
+                    <div class="error">{{ form.password2.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-actions">
+                <div class="button-container">
+                    <button type="submit" class="btn btn-primary">
+                        Зарегистрироваться
+                    </button>
+                </div>
+                <div>
+                    <p class="proposal">Уже есть аккаунт? <a href="{% url 'vinyl:login' %}" class="link link-login">Войти</a></p>
+                </div>
+            </div>
+        </form>
+    </div>
 {% endblock %}
