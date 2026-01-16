@@ -2,9 +2,15 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+{% block extra_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'vinyl/css/edit_form.css' %}">
+{% endblock %}
+
 {% block content %}
     <div class="form-container">
         <h1>{{ title }}</h1>
+        <h2 class="edit-record">{{ record.title }} - {{ record.artist }} ({{ record.year }})</h2>
 
         <form method="post" class="vinyl-form">
             {% csrf_token %}
@@ -71,11 +77,11 @@
                 <button type="submit" class="btn btn_primary">
                     Сохранить изменения
                 </button>
-                <a href="{% url 'vinyl:vinyl_list' %}" class="btn btn_secondary">
+                <a href="{% url 'vinyl:vinyl_list' %}" class="link btn_secondary">
                     Отмена
                 </a>
                 <a href="{% url 'vinyl:delete_record' record.id %}"
-                   class="btn btn_danger">
+                   class="link btn_danger">
                     Удалить
                 </a>
             </div>

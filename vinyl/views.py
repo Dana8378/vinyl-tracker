@@ -89,7 +89,7 @@ def edit_record(request, record_id):
     return render(request, 'vinyl/edit_form.html', {
         'form': form,
         'record': record,
-        'title': f'Редактировать {record.artist} - {record.title}'
+        'title': f'Редактировать'
     })
 
 
