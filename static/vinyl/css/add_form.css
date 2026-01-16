@@ -1,0 +1,46 @@
+.form-container {
+    display: grid;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: var(--dark-olive);
+    font-size: 40px;
+}
+
+.form-group {
+    text-align: center;
+    font-size: 22px;
+}
+
+.form-actions {
+    text-align: center;
+    display: flex;
+    max-width: 450px;
+    margin: 20px auto;
+    justify-content: center;
+}
+
+.alert-errors {
+    text-align: center;
+    color: var(--red);
+}
+
+.btn_secondary {
+    border: 2px solid var(--olive);
+    font-size: 22px;
+    margin-left: 40px;
+    border-radius: 4px;
+}
+
+.btn_primary {
+    font-size: 22px;
+    border-radius: 4px;
+}
+
+.btn_secondary:hover,
+.btn_primary:hover {
+    background-color: var(--light-olive);
+    border-color: var(--dark-red);
+}

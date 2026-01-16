@@ -11,6 +11,7 @@
 .btn-secondary,
 .btn-danger {
     font-size: 22px;
+    border-radius: 4px;
 }
 
 .btn-secondary:hover,

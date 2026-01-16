@@ -2,6 +2,11 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+{% block extra_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'vinyl/css/add_form.css' %}">
+{% endblock %}
+
 {% block content %}
     <div class="form-container">
         <h1>{{ title }}</h1>
@@ -69,7 +74,7 @@
                 <button type="submit" class="btn btn_primary">
                     Сохранить пластинку
                 </button>
-                <a href="{% url 'vinyl:vinyl_list' %}" class="btn btn_secondary">
+                <a href="{% url 'vinyl:vinyl_list' %}" class="link btn_secondary">
                     Отмена
                 </a>
             </div>
